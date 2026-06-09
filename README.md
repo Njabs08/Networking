@@ -1,50 +1,114 @@
-# Office-p2p-network.pkt
-Peer-to-peer office network simulation using Cisco Packet Tracer
+#  Peer-to-Peer Office Network — Cisco Packet Tracer
 
-# Peer-to-Peer Office Network — Cisco Packet Tracer
 A simulated inter-office network connecting two branch offices using a single router, built and tested in Cisco Packet Tracer.
 
-# Project Overview
-This project demonstrates a basic peer-to-peer office network where two offices which are Administrative Office and IT office with different IP addressing schemes communicate through a centrally connected router. It covers core networking concepts including IP addressing, subnetting, inter-LAN routing, and end-to-end connectivity verification.
+---
 
-# NETWORK TOPOLOGY
-<img width="1920" height="1032" alt="Peer to Peer" src="https://github.com/user-attachments/assets/82f33e2d-5c65-4137-be65-ac622d4b5d77" />
+##  Project Overview
 
-# IP Addressing Table
-Device  Interface  IP Address    Subnet Mask     Default Gateway    
+This project demonstrates a basic peer-to-peer office network where two offices with different IP addressing schemes communicate through a centrally connected router. It covers core networking concepts including IP addressing, subnetting, inter-LAN routing, and end-to-end connectivity verification.
 
-R1        Gi0/0    192.168.4.1   255.255.255.0     — 
-R1        Gi0/1    10.0.5.1      255.255.0.0       —
-PC1        Fa0     192.168.4.10  255.255.255.0    192.168.4.1  
-PC2        Fa0     192.168.4.20  255.255.255.0    192.168.4.1
-PC3        Fa0     192.168.4.35  255.255.255.0    192.168.4.1 
-PC4        Fa0     10.0.5.20     255.255.0.0      10.0.5.1
-PC5        Fa0     10.0.5.21     255.255.0.0      10.0.5.1
+---
+
+##  Network Topology
+
+<img width="1136" height="393" alt="image" src="https://github.com/user-attachments/assets/3300cc9f-671e-4f82-a0d3-40b7a5883bf2" />
 
 
-# Connectivity Tests
-Verified end-to-end connectivity using (ping ) from the PC Command Prompt:
-Source   Destination       Result   
-PC1      192.168.4.20      Success
-PC1      192.168.4.35      Success
-PC1      10.0.5.20         Success
-PC1      10.0.5.21         Success
-PC4      192.168.4.10      Success
+##  IP Addressing Table
 
-# Tools Used
-Cisco Packet Tracer
-Cisco 2911 Router
-Cisco 2960-24TT Switches
+| Device  | Interface | IP Address      | Subnet Mask     | Default Gateway |
+|---------|-----------|-----------------|-----------------|-----------------|
+| Router2 | Gi0/0     | 192.168.10.1    | 255.255.255.0   | —               |
+| Router2 | Gi0/1     | 172.16.0.1      | 255.255.255.0   | —               |
+| PC0     | Fa0       | 192.168.10.10   | 255.255.255.0   | 192.168.10.1    |
+| PC1     | Fa0       | 192.168.10.20   | 255.255.255.0   | 192.168.10.1    |
+| PC2     | Fa0       | 192.168.10.30   | 255.255.255.0   | 192.168.10.1    |
+| PC3     | Fa0       | 172.16.0.10     | 255.255.255.0   | 172.16.0.1      |
+| PC4     | Fa0       | 172.16.0.20     | 255.255.255.0   | 172.16.0.1      |
 
-# Concepts Demonstrated
-IPv4 addressing and subnetting (/24 and /16)
-Default gateway configuration
-Inter-LAN routing via a single router
-Layer 2 switching (no VLAN configuration required)
-End-to-end connectivity verification using ping
+---
 
+##  Router Configuration (Router2)
 
-# 👤 Author
-Njabulo Prince Tshuma
-BYU Pathway Student — BYU Pathway Worldwide
-GitHub: Njabs08
+```bash
+enable
+configure terminal
+hostname Router2
+
+! Administrative Office - LAN Interface
+interface GigabitEthernet0/0
+ description Administrative-Office-LAN
+ ip address 192.168.10.1 255.255.255.0
+ no shutdown
+
+! IT Office - LAN Interface
+interface GigabitEthernet0/1
+ description IT-Office-LAN
+ ip address 172.16.0.1 255.255.255.0
+ no shutdown
+
+end
+write memory
+```
+
+> **Note:** No static routes are needed. The router is directly connected to both networks and automatically knows how to route between them.
+
+---
+
+##  PC Configuration
+
+### Administrative Office
+
+| Device | IP Address    | Subnet Mask   | Default Gateway |
+|--------|---------------|---------------|-----------------|
+| PC0    | 192.168.10.10 | 255.255.255.0 | 192.168.10.1    |
+| PC1    | 192.168.10.20 | 255.255.255.0 | 192.168.10.1    |
+| PC2    | 192.168.10.30 | 255.255.255.0 | 192.168.10.1    |
+
+### IT Office
+
+| Device | IP Address  | Subnet Mask   | Default Gateway |
+|--------|-------------|---------------|-----------------|
+| PC3    | 172.16.0.10 | 255.255.255.0 | 172.16.0.1      |
+| PC4    | 172.16.0.20 | 255.255.255.0 | 172.16.0.1      |
+
+---
+
+##  Connectivity Tests
+
+Verified end-to-end connectivity using `ping` from the PC Command Prompt:
+
+| Source | Destination   | Result     |
+|--------|---------------|------------|
+| PC0    | 192.168.10.20 | ✅ Success |
+| PC0    | 192.168.10.30 | ✅ Success |
+| PC0    | 172.16.0.10   | ✅ Success |
+| PC0    | 172.16.0.20   | ✅ Success |
+| PC3    | 192.168.10.10 | ✅ Success |
+
+---
+
+##  Tools Used
+
+- Cisco Packet Tracer
+- Cisco 2911 Router
+- Cisco 2960-24TT Switches
+
+---
+
+##  Concepts Demonstrated
+
+- IPv4 addressing and subnetting (/24)
+- Default gateway configuration
+- Inter-LAN routing via a single router
+- Layer 2 switching (no VLAN configuration required)
+- End-to-end connectivity verification using ping
+
+---
+
+## 👤 Author
+
+**Njabulo Prince Tshuma**  
+BIT Student — BYU Pathway Worldwide  
+[GitHub: Njabs08](https://github.com/Njabs08)
