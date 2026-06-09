@@ -81,11 +81,11 @@ Verified end-to-end connectivity using `ping` from the PC Command Prompt:
 
 | Source | Destination   | Result     |
 |--------|---------------|------------|
-| PC0    | 192.168.10.20 | ✅ Success |
-| PC0    | 192.168.10.30 | ✅ Success |
-| PC0    | 172.16.0.10   | ✅ Success |
-| PC0    | 172.16.0.20   | ✅ Success |
-| PC3    | 192.168.10.10 | ✅ Success |
+| PC0    | 192.168.10.20 |  Success |
+| PC0    | 192.168.10.30 |  Success |
+| PC0    | 172.16.0.10   |  Success |
+| PC0    | 172.16.0.20   |  Success |
+| PC3    | 192.168.10.10 |  Success |
 
 ---
 
@@ -110,5 +110,3 @@ Verified end-to-end connectivity using `ping` from the PC Command Prompt:
 ## 👤 Author
 
 **Njabulo Prince Tshuma**  
-BIT Student — BYU Pathway Worldwide  
-[GitHub: Njabs08](https://github.com/Njabs08)
